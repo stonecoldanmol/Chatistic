@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "547378166608",
+    "firebase_url": "https://chatistic-b8369.firebaseio.com",
+    "project_id": "chatistic-b8369",
+    "storage_bucket": "chatistic-b8369.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547378166608:android:2859103c0f173f76ec0a55",
+        "android_client_info": {
+          "package_name": "com.anmolsinha.chatistic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "547378166608-sm1o8hc2ag690423kggdo10uurv91a04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anmolsinha.chatistic",
+            "certificate_hash": "557f7dfcf7bee465d3b1e4a9c82edcf6c8fb7e51"
+          }
+        },
+        {
+          "client_id": "547378166608-hqofltm9cck2bha6mmtli73lq1a3lc8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdW50bqXZ2aIjJKr5GUrdlRVw7L3Kublw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "547378166608-hqofltm9cck2bha6mmtli73lq1a3lc8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
