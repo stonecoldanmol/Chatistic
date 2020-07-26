@@ -21,9 +21,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Firestore.instance.collection("users").document().setData({
-      "name" : "Anmol"
-    });
     return MaterialApp(
       title: "Chatistic",
       debugShowCheckedModeBanner: false,
