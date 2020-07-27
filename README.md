@@ -1,6 +1,6 @@
-# chatistic
+# Chatistic
 
-A new Flutter application.
+Chatting and one to one Video chat app.
 
 ## Getting Started
 
