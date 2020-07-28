@@ -124,7 +124,7 @@ class _ChatListContainerState extends State<ChatListContainer> {
                   CircleAvatar(
                     maxRadius: 30,
                     backgroundColor: Colors.grey,
-                    backgroundImage: NetworkImage("https://unsplash.com/photos/aNrRsB2wLDk"),
+                    backgroundImage: AssetImage("assets/profileimg.png"),
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
