@@ -43,6 +43,29 @@ return CustomAppBar(
     },
   ),
   title: UserCircle(initials),
+  centerTitle: true,
+  actions: <Widget>[
+
+    IconButton(
+        icon: Icon(
+          Icons.search,
+          color: Colors.white,
+        ),
+      onPressed: (){},
+    ),
+
+    IconButton(
+      icon: Icon(
+        Icons.more_vert,
+        color: Colors.white,
+      ),
+      onPressed: (){},
+    ),
+
+
+
+
+  ],
 );
 }
 
@@ -52,6 +75,7 @@ return CustomAppBar(
     return Scaffold(
       backgroundColor: UniversalVariables.blackColor,
       appBar: customAppBar(context),
+
     );
   }
   
