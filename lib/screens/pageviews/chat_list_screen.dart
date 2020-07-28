@@ -2,6 +2,7 @@ import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/utils/utilities.dart';
 import 'package:chatistic/widgets/appbar.dart';
+import 'package:chatistic/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 
 class ChatListScreen extends StatefulWidget {
@@ -75,11 +76,84 @@ return CustomAppBar(
     return Scaffold(
       backgroundColor: UniversalVariables.blackColor,
       appBar: customAppBar(context),
-
+      floatingActionButton: NewChatButton(),
+      body: ChatListContainer(currentUserId),
     );
   }
   
 }
+
+
+class ChatListContainer extends StatefulWidget {
+
+  final String currentUserId;
+
+  ChatListContainer(this.currentUserId);
+
+  @override
+  _ChatListContainerState createState() => _ChatListContainerState();
+}
+
+class _ChatListContainerState extends State<ChatListContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        padding: EdgeInsets.all(10),
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return CustomTile(
+            mini: false,
+            onTap: () {},
+            title: Text(
+              "Anmol Sinha",
+              style: TextStyle(
+                  color: Colors.white, fontFamily: "Arial", fontSize: 19),
+            ),
+            subtitle: Text(
+              "Hello",
+              style: TextStyle(
+                color: UniversalVariables.greyColor,
+                fontSize: 14,
+              ),
+            ),
+            leading: Container(
+              constraints: BoxConstraints(maxHeight: 60, maxWidth: 60),
+              child: Stack(
+                children: <Widget>[
+                  CircleAvatar(
+                    maxRadius: 30,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: NetworkImage("https://unsplash.com/photos/aNrRsB2wLDk"),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      height: 13,
+                      width: 13,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: UniversalVariables.onlineDotColor,
+                          border: Border.all(
+                              color: UniversalVariables.blackColor,
+                              width: 2
+                          )
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+
+
 
 class UserCircle extends StatelessWidget {
   final String text;
@@ -133,6 +207,22 @@ class UserCircle extends StatelessWidget {
 }
 
 
+class NewChatButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          gradient: UniversalVariables.fabGradient,
+          borderRadius: BorderRadius.circular(50)),
+      child: Icon(
+        Icons.edit,
+        color: Colors.white,
+        size: 25,
+      ),
+      padding: EdgeInsets.all(15),
+    );
+  }
+}
 
 
 
