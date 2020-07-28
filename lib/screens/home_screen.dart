@@ -1,3 +1,4 @@
+import 'package:chatistic/screens/pageviews/chat_list_screen.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,9 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: UniversalVariables.blackColor,
       body: PageView(
         children: <Widget>[
-          Center(child: Text('Chat List Screen')),
-          Center(child: Text('Call Logs')),
-          Center(child: Text('Contact Screen')),
+         Container(child: ChatListScreen(),),
+          Center(child: Text('Call Logs',style: TextStyle(color: Colors.white),)),
+          Center(child: Text('Contact Screen',style: TextStyle(color: Colors.white),)),
         ],
         controller: pageController,
         onPageChanged: onPageChanged,
