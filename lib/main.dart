@@ -1,6 +1,7 @@
 import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/screens/home_screen.dart';
 import 'package:chatistic/screens/login_screen.dart';
+import 'package:chatistic/screens/search_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: "Chatistic",
       debugShowCheckedModeBanner: false,
+      initialRoute: "/",
+      routes: {
+        '/search_screen':(context) => SearchScreen(),
+      },
       home: FutureBuilder(
         future: _repository.getCurrentUser(),
         builder: (context,AsyncSnapshot<FirebaseUser> snapshot){

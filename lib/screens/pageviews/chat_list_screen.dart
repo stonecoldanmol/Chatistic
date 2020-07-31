@@ -40,7 +40,7 @@ return CustomAppBar(
         color: Colors.white,
       ),
     onPressed: (){
-
+        Navigator.pushNamed(context, "/search_screen");
     },
   ),
   title: UserCircle(initials),
