@@ -1,6 +1,7 @@
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/utils/universal_variables.dart';
+import 'package:chatistic/widgets/custom_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -87,12 +88,63 @@ searchAppBar(BuildContext context)
     );
 }
 
+  buildSuggestions(String query) {
+    final List<User> suggestionList = query.isEmpty
+        ? []
+        : userList.where((User user) {
+      String _getUsername = user.username.toLowerCase();
+      String _query = query.toLowerCase();
+      String _getName = user.name.toLowerCase();
+      bool matchesUsername = _getUsername.contains(_query);
+      bool matchesName = _getName.contains(_query);
+
+      return (matchesUsername || matchesName);
+
+      // (User user) => (user.username.toLowerCase().contains(query.toLowerCase()) ||
+      //     (user.name.toLowerCase().contains(query.toLowerCase()))),
+    }).toList();
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: ((context, index) {
+        User searchedUser = User(
+            uid: suggestionList[index].uid,
+            profilePhoto: suggestionList[index].profilePhoto,
+            name: suggestionList[index].name,
+            username: suggestionList[index].username);
+
+        return CustomTile(
+          mini: false,
+          onTap: () {},
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(searchedUser.profilePhoto),
+            backgroundColor: Colors.grey,
+          ),
+          title: Text(
+            searchedUser.username,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            searchedUser.name,
+            style: TextStyle(color: UniversalVariables.greyColor),
+          ),
+        );
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UniversalVariables.blackColor,
       appBar: searchAppBar(context),
-      body: Container(),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: buildSuggestions(query),
+      ),
     );
   }
 }
