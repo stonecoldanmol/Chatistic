@@ -12,12 +12,10 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
-  FirebaseRepository _repository=FirebaseRepository();
-
+  FirebaseRepository _repository = FirebaseRepository();
 
   List<User> userList;
-  String query="";
+  String query = "";
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -25,68 +23,63 @@ class _SearchScreenState extends State<SearchScreen> {
     // TODO: implement initState
     super.initState();
 
-    _repository.getCurrentUser().then((FirebaseUser user){
-
-      _repository.fetchAllUsers(user).then((List<User> list){
+    _repository.getCurrentUser().then((FirebaseUser user) {
+      _repository.fetchAllUsers(user).then((List<User> list) {
         setState(() {
-          userList=list;
+          userList = list;
         });
       });
-
     });
   }
 
-searchAppBar(BuildContext context)
-{
+  searchAppBar(BuildContext context) {
     return GradientAppBar(
       backgroundColorStart: UniversalVariables.gradientColorStart,
       backgroundColorEnd: UniversalVariables.gradientColorEnd,
       leading: IconButton(
-          icon: Icon(Icons.arrow_back,color: Colors.white,),
-        onPressed: ()=> Navigator.pop(context),
+        icon: Icon(Icons.arrow_back, color: Colors.white),
+        onPressed: () => Navigator.pop(context),
       ),
       elevation: 0,
       bottom: PreferredSize(
-
         preferredSize: const Size.fromHeight(kToolbarHeight + 20),
         child: Padding(
-            padding: EdgeInsets.only(left: 20),
-           child: TextField(
-             controller: searchController,
-             onChanged: (val){
-               setState(() {
-                 query=val;
-               });
-             },
-             cursorColor: UniversalVariables.blackColor,
-             autofocus: true,
-             style: TextStyle(
-               fontWeight: FontWeight.bold,
-               color: Colors.white,
-               fontSize: 35,
-             ),
-             decoration: InputDecoration(
-               suffixIcon: IconButton(
-                 icon: Icon(Icons.close,color: Colors.white,),
-                 onPressed: (){
-                   //searchController.clear();
-                   WidgetsBinding.instance.addPostFrameCallback((_) => searchController.clear());
-                 },
-               ),
-               border: InputBorder.none,
-               hintText: 'Search',
-               hintStyle: TextStyle(
-                 fontWeight: FontWeight.bold,
-                 fontSize: 35,
-                 color: Color(0x88ffffff),
-               ),
-             ),
-           ),
+          padding: EdgeInsets.only(left: 20),
+          child: TextField(
+            controller: searchController,
+            onChanged: (val) {
+              setState(() {
+                query = val;
+              });
+            },
+            cursorColor: UniversalVariables.blackColor,
+            autofocus: true,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 35,
+            ),
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(Icons.close, color: Colors.white),
+                onPressed: () {
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => searchController.clear());
+                },
+              ),
+              border: InputBorder.none,
+              hintText: "Search",
+              hintStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 35,
+                color: Color(0x88ffffff),
+              ),
+            ),
+          ),
         ),
-
       ),
     );
-}
+  }
 
   buildSuggestions(String query) {
     final List<User> suggestionList = query.isEmpty
@@ -149,17 +142,34 @@ searchAppBar(BuildContext context)
   }
 }
 
+//  return ListView.builder(
+//       itemCount: suggestionList.length,
+//       itemBuilder: ((context, index) {
+//         User searchedUser = User(
+//             uid: suggestionList[index].uid,
+//             profilePhoto: suggestionList[index].profilePhoto,
+//             name: suggestionList[index].name,
+//             username: suggestionList[index].username);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+//         return CustomTile(
+//           mini: false,
+//           onTap: () {;
+//           },
+//           leading: CircleAvatar(
+//             backgroundImage: NetworkImage(searchedUser.profilePhoto),
+//             backgroundColor: Colors.grey,
+//           ),
+//           title: Text(
+//             searchedUser.username,
+//             style: TextStyle(
+//               color: Colors.white,
+//               fontWeight: FontWeight.bold,
+//             ),
+//           ),
+//           subtitle: Text(
+//             searchedUser.name,
+//             style: TextStyle(color: UniversalVariables.greyColor),
+//           ),
+//         );
+//       }),
+//     );
