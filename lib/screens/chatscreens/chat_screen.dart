@@ -175,13 +175,7 @@ getMessage(DocumentSnapshot snapshot)
       ),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: Text(
-          'Hello',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
-        ),
+        child: getMessage(snapshot),
       ),
     );
   }
