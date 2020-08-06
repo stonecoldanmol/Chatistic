@@ -1,3 +1,4 @@
+import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/utils/utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -79,4 +80,19 @@ class FirebaseMethods {
     }
     return userList;
   }
+
+  Future<void> addMessageToDb(Message message,User sender,User receiver) async{
+
+    var map=message.toMap();
+    await firestore.collection("messages").document(message.senderId).collection(message.receiverId).add(map);
+
+    return await firestore.collection("messages").document(message.receiverId).collection(message.senderId).add(map);
+  }
+
+
+
+
+
+
+
 }

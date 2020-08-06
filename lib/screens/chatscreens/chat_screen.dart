@@ -1,7 +1,10 @@
+import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
+import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/widgets/appbar.dart';
 import 'package:chatistic/widgets/custom_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +20,36 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
 
   TextEditingController textFieldController =TextEditingController();
+  FirebaseRepository _repository=FirebaseRepository();
+
+  User sender;
+
+  String _currentUserId;
 
   bool isWriting = false;
+
+  @override
+  void initState()
+  {
+    // TODO: implement initState
+    super.initState();
+
+    _repository.getCurrentUser().then((user)
+    {
+        _currentUserId=user.uid;
+
+        setState(()
+        {
+          sender=User(
+            uid: user.uid,
+            name: user.displayName,
+            profilePhoto: user.photoUrl,
+
+          );
+        });
+
+    });
+  }
 
 
   @override
@@ -141,6 +172,8 @@ return Container(
         isWriting=val;
       });
     }
+
+
 
 
     addMediaModal(context)
@@ -284,16 +317,36 @@ return Container(
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              icon: Icon(Icons.send,
+              icon: Icon(
+                Icons.send,
               size: 15,
               ),
-              onPressed: () => {},
+              onPressed: () => sendMessage(),
             ),
           ): Container()
         ],
       ),
     );
   }
+
+
+  sendMessage()
+  {
+    var text =textFieldController.text;
+
+    Message _message = Message(receiverId: widget.receiver.uid,senderId: sender.uid,message: text,timestamp: FieldValue.serverTimestamp(),type: 'text');
+
+    setState(() {
+      isWriting=false;
+    });
+
+    _repository.addMessageToDb(_message, sender, widget.receiver);
+
+  }
+
+
+
+
 
 
   CustomAppBar customAppBar(context){
