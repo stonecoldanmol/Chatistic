@@ -76,33 +76,44 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget messageList()
   {
 
-    return ListView.builder(
-      padding: EdgeInsets.all(10),
-      itemCount: 6,
-      itemBuilder: (context,index)
-      {
-        return chatMessageItem();
-
+    return StreamBuilder(
+      stream: Firestore.instance.collection("messages").document(_currentUserId).collection(widget.receiver.uid).orderBy("timestamp",descending: true).snapshots(),
+      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
+        if(snapshot.data==null)
+          {
+            return Center(child: CircularProgressIndicator(),);
+          }
+        return ListView.builder(
+          padding: EdgeInsets.all(10),
+          itemCount: snapshot.data.documents.length,
+          itemBuilder: (context, index) {
+            return chatMessageItem(snapshot.data.documents[index]);
+          },
+        );
 
       },
+
     );
 
   }
 
-Widget chatMessageItem()
+
+
+Widget chatMessageItem(DocumentSnapshot snapshot)
 {
 
   return Container(
     margin: EdgeInsets.symmetric(vertical: 15),
     child: Container(
-      alignment: Alignment.centerRight,
-      child: senderLayout(),
+      alignment: snapshot['senderId']== _currentUserId ? Alignment.centerRight:Alignment.centerLeft,
+      child: snapshot['senderId'] == _currentUserId
+          ? senderLayout(snapshot)
+          : receiverLayout(snapshot),
     ),
   );
-
 }
 
-Widget senderLayout()
+Widget senderLayout(DocumentSnapshot snapshot)
 {
 
   Radius messageRadius = Radius.circular(10);
@@ -122,19 +133,29 @@ return Container(
   ),
   child: Padding(
     padding: EdgeInsets.all(10),
-    child: Text(
-      'Hello',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-      ),
-    ),
+    child: getMessage(snapshot)
   ),
 );
 }
 
+getMessage(DocumentSnapshot snapshot)
+{
 
-  Widget receiverLayout()
+  return Text(
+    snapshot['message'],
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 16.0,
+    ),
+  );
+
+}
+
+
+
+
+
+  Widget receiverLayout(DocumentSnapshot snapshot)
   {
 
     Radius messageRadius = Radius.circular(10);
