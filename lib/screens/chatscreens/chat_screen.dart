@@ -188,9 +188,6 @@ getMessage(DocumentSnapshot snapshot)
       });
     }
 
-
-
-
     addMediaModal(context)
     {
         showModalBottomSheet(
