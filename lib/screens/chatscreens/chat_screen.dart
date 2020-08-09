@@ -1,3 +1,4 @@
+import 'package:chatistic/constants/strings.dart';
 import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
@@ -77,7 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
   {
 
     return StreamBuilder(
-      stream: Firestore.instance.collection("messages").document(_currentUserId).collection(widget.receiver.uid).orderBy("timestamp",descending: true).snapshots(),
+      stream: Firestore.instance.collection(MESSAGES_COLLECTION).document(_currentUserId).collection(widget.receiver.uid).orderBy(TIMESTAMP_FIELD,descending: true).snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot){
         if(snapshot.data==null)
           {
@@ -348,11 +349,13 @@ getMessage(Message message)
   {
     var text =textFieldController.text;
 
-    Message _message = Message(receiverId: widget.receiver.uid,senderId: sender.uid,message: text,timestamp: FieldValue.serverTimestamp(),type: 'text');
+    Message _message = Message(receiverId: widget.receiver.uid,senderId: sender.uid,message: text,timestamp: Timestamp.now(),type: 'text');
 
     setState(() {
       isWriting=false;
     });
+
+    textFieldController.text = "";
 
     _repository.addMessageToDb(_message, sender, widget.receiver);
 
