@@ -145,7 +145,8 @@ getMessage(Message message)
 
   return Text(
     message.message,
-    style: TextStyle(
+    style: TextStyle
+      (
       color: Colors.white,
       fontSize: 16.0,
     ),
