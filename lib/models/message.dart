@@ -24,7 +24,14 @@ class Message
     return map;
   }
 
-
+  // named constructor
+  Message.fromMap(Map<String, dynamic> map) {
+    this.senderId = map['senderId'];
+    this.receiverId = map['receiverId'];
+    this.type = map['type'];
+    this.message = map['message'];
+    this.timestamp = map['timestamp'];
+  }
 
 
 }
