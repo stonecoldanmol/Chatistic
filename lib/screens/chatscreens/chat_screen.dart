@@ -100,18 +100,22 @@ class _ChatScreenState extends State<ChatScreen> {
 Widget chatMessageItem(DocumentSnapshot snapshot)
 {
 
+  Message _message=Message.fromMap(snapshot.data);
+
+
+
   return Container(
     margin: EdgeInsets.symmetric(vertical: 15),
     child: Container(
-      alignment: snapshot['senderId']== _currentUserId ? Alignment.centerRight:Alignment.centerLeft,
-      child: snapshot['senderId'] == _currentUserId
-          ? senderLayout(snapshot)
-          : receiverLayout(snapshot),
+      alignment: _message.senderId== _currentUserId ? Alignment.centerRight:Alignment.centerLeft,
+      child: _message.senderId== _currentUserId
+          ? senderLayout(_message)
+          : receiverLayout(_message),
     ),
   );
 }
 
-Widget senderLayout(DocumentSnapshot snapshot)
+Widget senderLayout(Message message)
 {
 
   Radius messageRadius = Radius.circular(10);
@@ -131,16 +135,16 @@ return Container(
   ),
   child: Padding(
     padding: EdgeInsets.all(10),
-    child: getMessage(snapshot)
+    child: getMessage(message)
   ),
 );
 }
 
-getMessage(DocumentSnapshot snapshot)
+getMessage(Message message)
 {
 
   return Text(
-    snapshot['message'],
+    message.message,
     style: TextStyle(
       color: Colors.white,
       fontSize: 16.0,
@@ -150,7 +154,7 @@ getMessage(DocumentSnapshot snapshot)
 }
 
 
-  Widget receiverLayout(DocumentSnapshot snapshot)
+  Widget receiverLayout(Message message)
   {
 
     Radius messageRadius = Radius.circular(10);
@@ -170,7 +174,7 @@ getMessage(DocumentSnapshot snapshot)
       ),
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: getMessage(snapshot),
+        child: getMessage(message),
       ),
     );
   }
