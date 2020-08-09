@@ -97,8 +97,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   }
 
-
-
 Widget chatMessageItem(DocumentSnapshot snapshot)
 {
 
@@ -152,9 +150,6 @@ getMessage(DocumentSnapshot snapshot)
 }
 
 
-
-
-
   Widget receiverLayout(DocumentSnapshot snapshot)
   {
 
@@ -180,10 +175,12 @@ getMessage(DocumentSnapshot snapshot)
     );
   }
 
-  Widget chatControls(){
-
-    setWritingTo(bool val){
-      setState(() {
+  Widget chatControls()
+  {
+    setWritingTo(bool val)
+    {
+      setState(()
+      {
         isWriting=val;
       });
     }
