@@ -6,8 +6,10 @@ import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/widgets/appbar.dart';
 import 'package:chatistic/widgets/custom_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -23,11 +25,19 @@ class _ChatScreenState extends State<ChatScreen> {
   TextEditingController textFieldController =TextEditingController();
   FirebaseRepository _repository=FirebaseRepository();
 
+  ScrollController _listScrollController=ScrollController();
+
+
   User sender;
 
   String _currentUserId;
 
+  FocusNode textFieldFocus = FocusNode();
+
   bool isWriting = false;
+
+  bool showEmojiPicker = false;
+
 
   @override
   void initState()
@@ -65,13 +75,33 @@ class _ChatScreenState extends State<ChatScreen> {
             child: messageList(),
           ),
 
-
-
           chatControls(),
+          showEmojiPicker ? Container(child: emojiContainer()) : Container(),
         ],
       ),
     );
   }
+
+
+  emojiContainer()
+  {
+  return EmojiPicker(
+    bgColor: UniversalVariables.separatorColor,
+    indicatorColor: UniversalVariables.blueColor,
+    rows: 3,
+    columns: 7,
+    onEmojiSelected: (emoji, category) {
+      setState(() {
+        isWriting = true;
+      });
+
+      textFieldController.text = textFieldController.text + emoji.emoji;
+    },
+    recommendKeywords: ["face", "happy", "party", "sad"],
+    numRecommended: 50,
+  );
+  }
+
 
 
   Widget messageList()
@@ -84,10 +114,21 @@ class _ChatScreenState extends State<ChatScreen> {
           {
             return Center(child: CircularProgressIndicator(),);
           }
+
+       /* SchedulerBinding.instance.addPostFrameCallback((_){
+          _listScrollController.animateTo(
+              _listScrollController.position.minScrollExtent,
+            duration: Duration(milliseconds: 250),
+            curve: Curves.easeInOut,
+          );
+        });*/
+
+
         return ListView.builder(
           padding: EdgeInsets.all(10),
           itemCount: snapshot.data.documents.length,
           reverse: true,
+          controller: _listScrollController,
           itemBuilder: (context, index) {
             return chatMessageItem(snapshot.data.documents[index]);
           },
@@ -291,37 +332,44 @@ getMessage(Message message)
           ),
           SizedBox(width: 5,),
           Expanded(
-            child: TextField(
-                controller: textFieldController,
-              style: TextStyle(
-                color: Colors.white,
-              ),
-              onChanged: (val){
-
-                (val.length>0 && val.trim()!="")? setWritingTo(true) : setWritingTo(false);
-
-              },
-              decoration: InputDecoration(
-                hintText: 'Type a Message',
-                hintStyle: TextStyle(
-                  color: UniversalVariables.greyColor,
+            child: Stack(
+              children: [
+                TextField(
+                  controller: textFieldController,
+                style: TextStyle(
+                  color: Colors.white,
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    const Radius.circular(50.0),
+                onChanged: (val){
+
+                  (val.length>0 && val.trim()!="")? setWritingTo(true) : setWritingTo(false);
+
+                },
+                decoration: InputDecoration(
+                  hintText: 'Type a Message',
+                  hintStyle: TextStyle(
+                    color: UniversalVariables.greyColor,
                   ),
-                  borderSide: BorderSide.none
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(50.0),
+                    ),
+                    borderSide: BorderSide.none
+                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                  filled: true,
+                  fillColor: UniversalVariables.separatorColor,
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-                filled: true,
-                fillColor: UniversalVariables.separatorColor,
-                suffixIcon: GestureDetector(
-                  onTap: (){
+              ),
+                 IconButton(
+                   splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onPressed: ()
+                  {
 
                   },
-                  child: Icon(Icons.face),
-                )
-              ),
+                  icon: Icon(Icons.face),
+                ),
+              ],
             ),
           ),
           isWriting?
