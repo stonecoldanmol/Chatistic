@@ -156,6 +156,7 @@ getMessage(Message message)
 }
 
 
+
   Widget receiverLayout(Message message)
   {
 
@@ -181,6 +182,7 @@ getMessage(Message message)
     );
   }
 
+
   Widget chatControls()
   {
     setWritingTo(bool val)
@@ -190,6 +192,9 @@ getMessage(Message message)
         isWriting=val;
       });
     }
+
+
+
 
     addMediaModal(context)
     {
@@ -262,6 +267,8 @@ getMessage(Message message)
           }
         );
     }
+
+
 
 
     return Container(
@@ -343,6 +350,8 @@ getMessage(Message message)
       ),
     );
   }
+
+
 
 
   sendMessage()
