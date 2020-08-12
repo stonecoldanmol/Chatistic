@@ -62,6 +62,24 @@ class _ChatScreenState extends State<ChatScreen> {
     });
   }
 
+    showKeyboard()=>textFieldFocus.requestFocus();
+
+  hideKeyboard() => textFieldFocus.unfocus();
+
+  hideEmojiContainer()
+  {
+    setState(() {
+      showEmojiPicker = false;
+    });
+  }
+
+  showEmojiContainer()
+  {
+    setState(() {
+      showEmojiPicker = true;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -333,9 +351,13 @@ getMessage(Message message)
           SizedBox(width: 5,),
           Expanded(
             child: Stack(
+              alignment: Alignment.centerRight,
               children: [
                 TextField(
                   controller: textFieldController,
+                focusNode: textFieldFocus,
+                onTap: ()=>hideEmojiContainer(),
+
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -365,7 +387,16 @@ getMessage(Message message)
                   highlightColor: Colors.transparent,
                   onPressed: ()
                   {
-
+                    if(!showEmojiPicker)
+                    {
+                      hideKeyboard();
+                      showEmojiContainer();
+                    }
+                    else
+                      {
+                        showKeyboard();
+                        hideEmojiContainer();
+                      }
                   },
                   icon: Icon(Icons.face),
                 ),
