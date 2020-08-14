@@ -120,8 +120,6 @@ class _ChatScreenState extends State<ChatScreen> {
   );
   }
 
-
-
   Widget messageList()
   {
 
@@ -141,7 +139,6 @@ class _ChatScreenState extends State<ChatScreen> {
           );
         });*/
 
-
         return ListView.builder(
           padding: EdgeInsets.all(10),
           itemCount: snapshot.data.documents.length,
@@ -157,6 +154,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
 
   }
+
 
 Widget chatMessageItem(DocumentSnapshot snapshot)
 {
