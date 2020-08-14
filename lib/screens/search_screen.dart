@@ -94,8 +94,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
       return (matchesUsername || matchesName);
 
-      // (User user) => (user.username.toLowerCase().contains(query.toLowerCase()) ||
-      //     (user.name.toLowerCase().contains(query.toLowerCase()))),
+      /* (User user) => (user.username.toLowerCase().contains(query.toLowerCase()) ||
+           (user.name.toLowerCase().contains(query.toLowerCase()))),*/
     }).toList();
 
     return ListView.builder(
