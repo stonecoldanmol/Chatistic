@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:chatistic/constants/strings.dart';
 import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/utils/universal_variables.dart';
+import 'package:chatistic/utils/utilities.dart';
 import 'package:chatistic/widgets/appbar.dart';
 import 'package:chatistic/widgets/custom_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +13,7 @@ import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -409,7 +413,12 @@ getMessage(Message message)
           ),
           isWriting?
           Container()
-              : Icon(Icons.camera_alt),
+              : GestureDetector(
+            child: Icon(
+                Icons.camera_alt
+            ),
+            onTap: () => pickImage(source: ImageSource.camera),
+          ),
           isWriting ? Container(
               margin: EdgeInsets.only(left: 10),
             decoration: BoxDecoration(
@@ -449,7 +458,16 @@ getMessage(Message message)
   }
 
 
-
+pickImage({@required ImageSource source}) async
+{
+  File selectedImage=await Utils.pickImage(source: source);
+  _repository.uploadImage(
+      image: selectedImage,
+      receiverId: widget.receiver.uid,
+      senderId: _currentUserId,
+    //  imageUploadProvider: _imageUploadProvider
+  );
+}
 
 
 
