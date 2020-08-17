@@ -6,6 +6,7 @@ import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/provider/image_upload_provider.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
+import 'package:chatistic/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/utils/utilities.dart';
 import 'package:chatistic/widgets/appbar.dart';
@@ -226,14 +227,15 @@ return Container(
 getMessage(Message message)
 {
 
-  return Text(
+return message.type!=MESSAGE_TYPE_IMAGE?
+   Text(
     message.message,
     style: TextStyle
       (
       color: Colors.white,
       fontSize: 16.0,
     ),
-  );
+  ):message.photoUrl!=null?CachedImage(url:message.photoUrl):Text('Url was null');
 
 }
 
