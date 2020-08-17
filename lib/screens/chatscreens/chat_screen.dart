@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chatistic/constants/strings.dart';
+import 'package:chatistic/enum/view_state.dart';
 import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/provider/image_upload_provider.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -89,16 +91,32 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    _imageUploadProvider=Provider.of<ImageUploadProvider>(context);
+
+
+
     return Scaffold(
         backgroundColor: UniversalVariables.blackColor,
       appBar: customAppBar(context),
       body: Column(
         children: <Widget>[
-
+          /*RaisedButton(
+            child: Text('Provider change'),
+            onPressed: ()
+            {
+              _imageUploadProvider.getViewState==ViewState.LOADING?_imageUploadProvider.setToIdle():_imageUploadProvider.setToLoading();
+            },
+          ),*/
           Flexible(
             child: messageList(),
           ),
-
+          _imageUploadProvider.getViewState==ViewState.LOADING?
+          Container(
+            alignment: Alignment.centerRight,
+            margin: EdgeInsets.only(right: 15),
+              child: CircularProgressIndicator(),
+          ):Container(),
           chatControls(),
           showEmojiPicker ? Container(child: emojiContainer()) : Container(),
         ],
