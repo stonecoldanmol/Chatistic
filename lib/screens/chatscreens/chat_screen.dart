@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chatistic/constants/strings.dart';
 import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
+import 'package:chatistic/provider/image_upload_provider.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/utils/utilities.dart';
@@ -31,7 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   ScrollController _listScrollController=ScrollController();
 
-
+  ImageUploadProvider _imageUploadProvider;
   User sender;
 
   String _currentUserId;
@@ -41,6 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool isWriting = false;
 
   bool showEmojiPicker = false;
+
 
 
   @override
@@ -465,7 +467,7 @@ pickImage({@required ImageSource source}) async
       image: selectedImage,
       receiverId: widget.receiver.uid,
       senderId: _currentUserId,
-    //  imageUploadProvider: _imageUploadProvider
+      imageUploadProvider: _imageUploadProvider
   );
 }
 
