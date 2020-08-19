@@ -324,26 +324,37 @@ return message.type!=MESSAGE_TYPE_IMAGE?
                         icon: Icons.photo,
                         onTap: () => pickImage(source: ImageSource.gallery),
                       ),
+
                       ModalTile(
                           title: "File",
                           subtitle: "Share Files",
-                          icon: Icons.tab),
+                          icon: Icons.tab
+                      ),
+
                       ModalTile(
                           title: "Contact",
                           subtitle: "Share Contacts",
-                          icon: Icons.contacts),
+                          icon: Icons.contacts
+                      ),
+
                       ModalTile(
                           title: "Location",
                           subtitle: "Share A Location",
-                          icon: Icons.add_location),
+                          icon: Icons.add_location
+                      ),
+
                       ModalTile(
                           title: "Schedule Call",
                           subtitle: "Arrange A Call And Get Reminders",
-                          icon: Icons.schedule),
+                          icon: Icons.schedule
+                      ),
+
                       ModalTile(
                           title: "Create Poll",
                           subtitle: "Share Polls",
-                          icon: Icons.poll),
+                          icon: Icons.poll
+                      ),
+
                     ],
                   ),
                 )
