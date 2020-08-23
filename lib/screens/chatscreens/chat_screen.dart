@@ -397,7 +397,8 @@ return message.type!=MESSAGE_TYPE_IMAGE?
                 style: TextStyle(
                   color: Colors.white,
                 ),
-                onChanged: (val){
+                onChanged: (val)
+                {
 
                   (val.length>0 && val.trim()!="")? setWritingTo(true) : setWritingTo(false);
 
@@ -471,8 +472,6 @@ return message.type!=MESSAGE_TYPE_IMAGE?
       ),
     );
   }
-
-
 
 
   sendMessage()
