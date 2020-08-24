@@ -7,3 +7,5 @@ const String EMAIL_FIELD = "email";
 const String TIMESTAMP_FIELD="timestamp";
 
 const String MESSAGE_TYPE_IMAGE="image";
+
+const String CALL_COLLECTION="call";
