@@ -51,6 +51,7 @@ final CallMethods callMethods=CallMethods();
                     await callMethods.endCall(call:call);
                   },
                 ),
+                SizedBox(width: 25,),
               ],
             ),
           ],
