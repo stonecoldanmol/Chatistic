@@ -2,6 +2,7 @@
 
 import 'package:chatistic/models/call.dart';
 import 'package:chatistic/resources/call_methods.dart';
+import 'package:chatistic/screens/callscreens/call_screen.dart';
 import 'package:flutter/material.dart';
 
 class PickupScreen extends StatelessWidget {
@@ -52,6 +53,11 @@ final CallMethods callMethods=CallMethods();
                   },
                 ),
                 SizedBox(width: 25,),
+                IconButton(
+                  icon: Icon(Icons.call),
+                  color: Colors.green,
+                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CallScreen(call:call),),),
+                ),
               ],
             ),
           ],
