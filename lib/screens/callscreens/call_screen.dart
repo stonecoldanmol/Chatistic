@@ -1,4 +1,4 @@
-import 'dart:js_util';
+
 
 import 'package:chatistic/models/call.dart';
 import 'package:chatistic/resources/call_methods.dart';
@@ -17,20 +17,24 @@ class _CallScreenState extends State<CallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Text(
-              'Call has been made',
-          ),
-          MaterialButton(
-            color: Colors.red,
-            child: Icon(
-              Icons.call_end,
-              //color: Colors.white,
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text(
+                'Call has been made',
             ),
-            onPressed: () async => await callMethods.endCall(call: widget.call),
-          ),
-        ],
+            MaterialButton(
+              color: Colors.red,
+              child: Icon(
+                Icons.call_end,
+                //color: Colors.white,
+              ),
+              onPressed: () async => await callMethods.endCall(call: widget.call),
+            ),
+          ],
+        ),
       ),
     );
   }
