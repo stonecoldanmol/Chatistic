@@ -7,6 +7,7 @@ import 'package:chatistic/models/user.dart';
 import 'package:chatistic/provider/image_upload_provider.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/screens/chatscreens/widgets/cached_image.dart';
+import 'package:chatistic/utils/call_utilities.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/utils/utilities.dart';
 import 'package:chatistic/widgets/appbar.dart';
@@ -523,10 +524,11 @@ pickImage({@required ImageSource source}) async
           icon: Icon(
             Icons.video_call,
           ),
-          onPressed: ()
-          {
-
-          },
+          onPressed: ()=>CallUtils.dial(
+            from: sender,
+            to: widget.receiver,
+            context: context,
+          )
         ),
         IconButton(
           icon: Icon(
