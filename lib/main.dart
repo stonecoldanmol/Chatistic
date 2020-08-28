@@ -1,4 +1,5 @@
 import 'package:chatistic/provider/image_upload_provider.dart';
+import 'package:chatistic/provider/user_provider.dart';
 import 'package:chatistic/resources/firebase_repository.dart';
 import 'package:chatistic/screens/home_screen.dart';
 import 'package:chatistic/screens/login_screen.dart';
@@ -24,8 +25,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ImageUploadProvider>(
-      create: (context)=>ImageUploadProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_)=>ImageUploadProvider()),
+        ChangeNotifierProvider(create: (_)=>UserProvider()),
+      ],
       child: MaterialApp(
         title: "Chatistic",
         debugShowCheckedModeBanner: false,
