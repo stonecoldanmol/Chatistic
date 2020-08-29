@@ -1,7 +1,10 @@
+import 'package:chatistic/provider/user_provider.dart';
 import 'package:chatistic/screens/pageviews/chat_list_screen.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,10 +17,22 @@ class _HomeScreenState extends State<HomeScreen> {
   PageController pageController;
   int _page=0;
 
+  UserProvider userProvider;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+
+
+    SchedulerBinding.instance.addPostFrameCallback((_){
+
+      userProvider=Provider.of<UserProvider>(context,listen: false);
+      userProvider.refreshUser();
+
+    });
+
+
     pageController=PageController();
   }
 
