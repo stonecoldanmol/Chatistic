@@ -3,6 +3,7 @@
 import 'package:chatistic/models/call.dart';
 import 'package:chatistic/resources/call_methods.dart';
 import 'package:chatistic/screens/callscreens/call_screen.dart';
+import 'package:chatistic/screens/chatscreens/widgets/cached_image.dart';
 import 'package:flutter/material.dart';
 
 class PickupScreen extends StatelessWidget {
@@ -27,10 +28,10 @@ final CallMethods callMethods=CallMethods();
               ),
             ),
             SizedBox(height: 50,),
-            Image.network(
+            CachedImage(
               call.callerPic,
-              height: 150,
-              width: 150,
+            isRound: true,
+              radius: 180,
             ),
             SizedBox(height: 15,),
             Text(
