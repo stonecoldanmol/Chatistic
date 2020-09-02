@@ -54,6 +54,13 @@ class _CallScreenState extends State<CallScreen> {
 
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    callStreamSubscription.cancel();
+  }
+
 
   @override
   Widget build(BuildContext context) {

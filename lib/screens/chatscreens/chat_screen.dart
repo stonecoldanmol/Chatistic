@@ -236,7 +236,7 @@ return message.type!=MESSAGE_TYPE_IMAGE?
       color: Colors.white,
       fontSize: 16.0,
     ),
-  ):message.photoUrl!=null?CachedImage(url:message.photoUrl):Text('Url was null');
+  ):message.photoUrl!=null?CachedImage( message.photoUrl, height: 250, width: 250, radius: 10,):Text('Url was null');
 
 }
 
