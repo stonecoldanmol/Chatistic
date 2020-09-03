@@ -4,6 +4,7 @@ import 'package:chatistic/models/call.dart';
 import 'package:chatistic/resources/call_methods.dart';
 import 'package:chatistic/screens/callscreens/call_screen.dart';
 import 'package:chatistic/screens/chatscreens/widgets/cached_image.dart';
+import 'package:chatistic/utils/permissions.dart';
 import 'package:flutter/material.dart';
 
 class PickupScreen extends StatelessWidget {
@@ -57,7 +58,10 @@ final CallMethods callMethods=CallMethods();
                 IconButton(
                   icon: Icon(Icons.call),
                   color: Colors.green,
-                  onPressed: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>CallScreen(call:call),),),
+                  onPressed: ()async=>await Permissions.cameraAndMicrophonePermissionsGranted()?
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CallScreen(call:call),
+                  ),
+                  ):{},
                 ),
               ],
             ),
