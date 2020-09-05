@@ -32,9 +32,7 @@ class FirebaseMethods {
 
   Future<User> getUserDetails() async {
     FirebaseUser currentUser = await getCurrentUser();
-
-    DocumentSnapshot documentSnapshot =
-    await _userCollection.document(currentUser.uid).get();
+    DocumentSnapshot documentSnapshot = await _userCollection.document(currentUser.uid).get();
 
     return User.fromMap(documentSnapshot.data);
   }
@@ -42,8 +40,7 @@ class FirebaseMethods {
 
   Future<FirebaseUser> signIn() async {
     GoogleSignInAccount _signInAccount = await _googleSignIn.signIn();
-    GoogleSignInAuthentication _signInAuthentication =
-    await _signInAccount.authentication;
+    GoogleSignInAuthentication _signInAuthentication = await _signInAccount.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.getCredential(
         accessToken: _signInAuthentication.accessToken,
