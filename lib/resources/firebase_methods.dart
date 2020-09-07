@@ -79,11 +79,13 @@ class FirebaseMethods {
         .setData(user.toMap(user));
   }
 
+
   Future<void> signOut() async {
     await _googleSignIn.disconnect();
     await _googleSignIn.signOut();
     return await _auth.signOut();
   }
+
 
   Future<List<User>> fetchAllUsers(FirebaseUser currentUser) async {
     List<User> userList = List<User>();
@@ -98,6 +100,7 @@ class FirebaseMethods {
     return userList;
   }
 
+
   Future<void> addMessageToDb(Message message,User sender,User receiver) async{
 
     var map=message.toMap();
@@ -105,6 +108,7 @@ class FirebaseMethods {
 
     return await firestore.collection(MESSAGES_COLLECTION).document(message.receiverId).collection(message.senderId).add(map);
   }
+
 
   Future<String> uploadImageToStorage(File imageFile) async {
     // mention try catch later on
@@ -123,6 +127,7 @@ class FirebaseMethods {
     }
   }
 
+
   void setImageMsg(String url, String receiverId, String senderId) async {
     Message message;
 
@@ -133,6 +138,7 @@ class FirebaseMethods {
         photoUrl: url,
         timestamp: Timestamp.now(),
         type: 'image');
+
 
     // create imagemap
     var map = message.toImageMap();
