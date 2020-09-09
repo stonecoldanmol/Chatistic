@@ -512,7 +512,8 @@ pickImage({@required ImageSource source}) async
         icon: Icon(
           Icons.arrow_back,
         ),
-        onPressed: (){
+        onPressed: ()
+        {
           Navigator.pop(context);
         },
       ),

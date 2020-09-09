@@ -137,7 +137,8 @@ class FirebaseMethods {
         senderId: senderId,
         photoUrl: url,
         timestamp: Timestamp.now(),
-        type: 'image');
+        type: 'image'
+    );
 
 
     // create imagemap

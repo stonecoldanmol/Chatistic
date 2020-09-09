@@ -27,8 +27,7 @@ class FirebaseRepository {
 
   Future<void> addMessageToDb(Message message,User sender,User receiver)=>_firebaseMethods.addMessageToDb(message,sender,receiver);
 
-  Future<String> uploadImageToStorage(File imageFile) =>
-      _firebaseMethods.uploadImageToStorage(imageFile);
+  Future<String> uploadImageToStorage(File imageFile) => _firebaseMethods.uploadImageToStorage(imageFile);
 
   // void showLoading(String receiverId, String senderId) =>
   //     _firebaseMethods.showLoading(receiverId, senderId);
@@ -36,15 +35,13 @@ class FirebaseRepository {
   // void hideLoading(String receiverId, String senderId) =>
   //     _firebaseMethods.hideLoading(receiverId, senderId);
 
-  void uploadImageMsgToDb(String url, String receiverId, String senderId) =>
-      _firebaseMethods.setImageMsg(url, receiverId, senderId);
+  void uploadImageMsgToDb(String url, String receiverId, String senderId) => _firebaseMethods.setImageMsg(url, receiverId, senderId);
 
   void uploadImage({
     @required File image,
     @required String receiverId,
     @required String senderId,
     @required ImageUploadProvider imageUploadProvider
-  }) =>
-      _firebaseMethods.uploadImage(image, receiverId, senderId, imageUploadProvider);
+  }) => _firebaseMethods.uploadImage(image, receiverId, senderId, imageUploadProvider);
 
 }
