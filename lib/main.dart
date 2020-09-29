@@ -1,6 +1,6 @@
 import 'package:chatistic/provider/image_upload_provider.dart';
 import 'package:chatistic/provider/user_provider.dart';
-import 'package:chatistic/resources/firebase_repository.dart';
+import 'package:chatistic/resources/auth_methods.dart';
 import 'package:chatistic/screens/home_screen.dart';
 import 'package:chatistic/screens/login_screen.dart';
 import 'package:chatistic/screens/search_screen.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
 
-  FirebaseRepository _repository =FirebaseRepository();
+  final AuthMethods _authMethods = AuthMethods();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
           brightness: Brightness.dark
         ),
         home: FutureBuilder(
-          future: _repository.getCurrentUser(),
+          future: _authMethods.getCurrentUser(),
           builder: (context,AsyncSnapshot<FirebaseUser> snapshot){
               if(snapshot.hasData){
                 return HomeScreen();

@@ -1,5 +1,6 @@
 import 'package:chatistic/models/user.dart';
-import 'package:chatistic/resources/firebase_repository.dart';
+import 'package:chatistic/resources/auth_methods.dart';
+
 import 'package:chatistic/screens/chatscreens/chat_screen.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/widgets/custom_tile.dart';
@@ -13,7 +14,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  FirebaseRepository _repository = FirebaseRepository();
+  final AuthMethods _authMethods = AuthMethods();
 
   List<User> userList;
   String query = "";
@@ -24,8 +25,8 @@ class _SearchScreenState extends State<SearchScreen> {
     // TODO: implement initState
     super.initState();
 
-    _repository.getCurrentUser().then((FirebaseUser user) {
-      _repository.fetchAllUsers(user).then((List<User> list) {
+    _authMethods.getCurrentUser().then((FirebaseUser user) {
+      _authMethods.fetchAllUsers(user).then((List<User> list) {
         setState(() {
           userList = list;
         });

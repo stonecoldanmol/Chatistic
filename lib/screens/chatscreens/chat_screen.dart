@@ -5,7 +5,9 @@ import 'package:chatistic/enum/view_state.dart';
 import 'package:chatistic/models/message.dart';
 import 'package:chatistic/models/user.dart';
 import 'package:chatistic/provider/image_upload_provider.dart';
-import 'package:chatistic/resources/firebase_repository.dart';
+import 'package:chatistic/resources/auth_methods.dart';
+import 'package:chatistic/resources/chat_methods.dart';
+import 'package:chatistic/resources/storage_methods.dart';
 import 'package:chatistic/screens/chatscreens/widgets/cached_image.dart';
 import 'package:chatistic/utils/call_utilities.dart';
 import 'package:chatistic/utils/permissions.dart';
@@ -33,7 +35,9 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
 
   TextEditingController textFieldController =TextEditingController();
-  FirebaseRepository _repository=FirebaseRepository();
+  final StorageMethods _storageMethods = StorageMethods();
+  final ChatMethods _chatMethods = ChatMethods();
+  final AuthMethods _authMethods = AuthMethods();
 
   ScrollController _listScrollController=ScrollController();
 
@@ -56,20 +60,16 @@ class _ChatScreenState extends State<ChatScreen> {
     // TODO: implement initState
     super.initState();
 
-    _repository.getCurrentUser().then((user)
-    {
-        _currentUserId=user.uid;
+    _authMethods.getCurrentUser().then((user) {
+      _currentUserId = user.uid;
 
-        setState(()
-        {
-          sender=User(
-            uid: user.uid,
-            name: user.displayName,
-            profilePhoto: user.photoUrl,
-
-          );
-        });
-
+      setState(() {
+        sender = User(
+          uid: user.uid,
+          name: user.displayName,
+          profilePhoto: user.photoUrl,
+        );
+      });
     });
   }
 
@@ -478,17 +478,23 @@ return message.type!=MESSAGE_TYPE_IMAGE?
 
   sendMessage()
   {
-    var text =textFieldController.text;
+    var text = textFieldController.text;
 
-    Message _message = Message(receiverId: widget.receiver.uid,senderId: sender.uid,message: text,timestamp: Timestamp.now(),type: 'text');
+    Message _message = Message(
+      receiverId: widget.receiver.uid,
+      senderId: sender.uid,
+      message: text,
+      timestamp: Timestamp.now(),
+      type: 'text',
+    );
 
     setState(() {
-      isWriting=false;
+      isWriting = false;
     });
 
     textFieldController.text = "";
 
-    _repository.addMessageToDb(_message, sender, widget.receiver);
+    _chatMethods.addMessageToDb(_message, sender, widget.receiver);
 
   }
 
@@ -496,12 +502,13 @@ return message.type!=MESSAGE_TYPE_IMAGE?
 pickImage({@required ImageSource source}) async
 {
   File selectedImage=await Utils.pickImage(source: source);
-  _repository.uploadImage(
+  _storageMethods.uploadImage(
       image: selectedImage,
       receiverId: widget.receiver.uid,
       senderId: _currentUserId,
       imageUploadProvider: _imageUploadProvider
   );
+
 }
 
 

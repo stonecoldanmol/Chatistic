@@ -1,4 +1,5 @@
-import 'package:chatistic/resources/firebase_repository.dart';
+
+import 'package:chatistic/resources/auth_methods.dart';
 import 'package:chatistic/screens/home_screen.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
-  FirebaseRepository _repository =FirebaseRepository();
+  final AuthMethods _authMethods = AuthMethods();
 
   bool isLoginPressed = false;
 
@@ -67,43 +68,35 @@ class _LoginScreenState extends State<LoginScreen> {
      isLoginPressed=true;
    });
 
-    _repository.signIn().then((FirebaseUser user)
-    {
-      if(user!=null)
-      {
-        authenticateUser(user);
-      }
-      else {
-        print("There was a error");
-      }
-    });
+   _authMethods.signIn().then((FirebaseUser user) {
+     if (user != null) {
+       authenticateUser(user);
+     } else {
+       print("There was an error");
+     }
+   });
  }
 void authenticateUser(FirebaseUser user)
 {
-_repository.authenticateUser(user).then((isNewUser){
-
-  setState(() {
-    isLoginPressed=false;
-  });
-
-  if(isNewUser)
-  {
-    _repository.addDataToDb(user).then((value){
-      Navigator.pushReplacement(context, 
-      MaterialPageRoute(builder: (context){
-        return HomeScreen();
-      }));
+  _authMethods.authenticateUser(user).then((isNewUser) {
+    setState(() {
+      isLoginPressed = false;
     });
-  }
-  else{
-    Navigator.pushReplacement(context,
-    MaterialPageRoute(builder: (context){
-      return HomeScreen();
-    }));
-  }
 
-
-});
+    if (isNewUser) {
+      _authMethods.addDataToDb(user).then((value) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+              return HomeScreen();
+            }));
+      });
+    } else {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) {
+            return HomeScreen();
+          }));
+    }
+  });
 }
 }
 
