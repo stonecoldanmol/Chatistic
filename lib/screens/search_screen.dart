@@ -34,7 +34,8 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 
-  searchAppBar(BuildContext context) {
+  searchAppBar(BuildContext context)
+  {
     return GradientAppBar(
       backgroundColorStart: UniversalVariables.gradientColorStart,
       backgroundColorEnd: UniversalVariables.gradientColorEnd,
@@ -83,7 +84,8 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  buildSuggestions(String query) {
+  buildSuggestions(String query)
+  {
     final List<User> suggestionList = query.isEmpty
         ? []
         : userList.where((User user) {
