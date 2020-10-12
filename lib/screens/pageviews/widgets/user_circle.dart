@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class UserCircle extends StatelessWidget {
+class UserCircle extends StatelessWidget
+{
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return GestureDetector(
