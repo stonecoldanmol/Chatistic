@@ -1,4 +1,5 @@
 class Call
+
 {
 
   String callerId;
@@ -22,7 +23,8 @@ class Call
   });
 
   // to map
-  Map<String, dynamic> toMap(Call call) {
+  Map<String, dynamic> toMap(Call call)
+  {
     Map<String, dynamic> callMap = Map();
     callMap["caller_id"] = call.callerId;
     callMap["caller_name"] = call.callerName;
@@ -35,7 +37,8 @@ class Call
     return callMap;
   }
 
-  Call.fromMap(Map callMap) {
+  Call.fromMap(Map callMap)
+  {
     this.callerId = callMap["caller_id"];
     this.callerName = callMap["caller_name"];
     this.callerPic = callMap["caller_pic"];
