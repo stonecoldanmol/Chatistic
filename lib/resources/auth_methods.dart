@@ -88,7 +88,8 @@ class AuthMethods {
         .setData(user.toMap(user));
   }
 
-  Future<List<User>> fetchAllUsers(FirebaseUser currentUser) async {
+  Future<List<User>> fetchAllUsers(FirebaseUser currentUser) async
+  {
     List<User> userList = List<User>();
 
     QuerySnapshot querySnapshot =

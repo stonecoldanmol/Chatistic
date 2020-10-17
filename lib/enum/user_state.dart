@@ -1,4 +1,5 @@
-enum UserState{
+enum UserState
+{
   Offline,
   Online,
   Waiting,
