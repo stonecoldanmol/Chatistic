@@ -1,4 +1,6 @@
-class Log {
+
+class Log
+{
   int logId;
   String callerName;
   String callerPic;
@@ -18,7 +20,8 @@ class Log {
   });
 
   // to map
-  Map<String, dynamic> toMap(Log log) {
+  Map<String, dynamic> toMap(Log log)
+  {
     Map<String, dynamic> logMap = Map();
     logMap["log_id"] = log.logId;
     logMap["caller_name"] = log.callerName;
@@ -30,7 +33,8 @@ class Log {
     return logMap;
   }
 
-  Log.fromMap(Map logMap) {
+  Log.fromMap(Map logMap)
+  {
     this.logId = logMap["log_id"];
     this.callerName = logMap["caller_name"];
     this.callerPic = logMap["caller_pic"];
