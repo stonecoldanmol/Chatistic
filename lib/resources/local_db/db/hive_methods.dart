@@ -37,6 +37,25 @@ class HiveMethods implements LogInterface {
     return idOfInput;
   }
 
+  updateLogs(int i, Log newLog) async {
+    var box = await Hive.openBox(hive_box);
+
+    var newLogMap = newLog.toMap(newLog);
+
+    box.putAt(i, newLogMap);
+
+    close();
+  }
+
+
+  @override
+  Future<List<Log>> getLogs()
+  {
+    // TODO: implement getLogs
+    return null;
+  }
+
+
   @override
   close()
   {
@@ -51,12 +70,6 @@ class HiveMethods implements LogInterface {
     return null;
   }
 
-  @override
-  Future<List<Log>> getLogs()
-  {
-    // TODO: implement getLogs
-    return null;
-  }
 
 
 }
