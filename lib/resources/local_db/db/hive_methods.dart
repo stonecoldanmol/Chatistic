@@ -49,10 +49,18 @@ class HiveMethods implements LogInterface {
 
 
   @override
-  Future<List<Log>> getLogs()
+  Future<List<Log>> getLogs() async
   {
-    // TODO: implement getLogs
-    return null;
+    var box = await Hive.openBox(hive_box);
+
+    List<Log> logList = [];
+
+    for (int i = 0; i < box.length; i++) {
+      var logMap = box.getAt(i);
+
+      logList.add(Log.fromMap(logMap));
+    }
+    return logList;
   }
 
 
