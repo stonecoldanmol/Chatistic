@@ -18,10 +18,23 @@ class HiveMethods implements LogInterface {
 
 
   @override
-    addLogs(Log log)
+    addLogs(Log log) async
   {
-    print("Adding values to hive db");
-    return null;
+    var box = await Hive.openBox(hive_box);
+    /*if(Hive.isBoxOpen(hive_box))
+      {
+        box=Hive.box("hive_box");
+      }
+    else
+      {
+        box=await Hive.openBox(hive_box);
+      }*/
+    var logMap=log.toMap(log);
+    int idOfInput=await box.add(logMap);
+    //box.put("custom_key",logMap);
+
+    close();
+    return idOfInput;
   }
 
   @override
