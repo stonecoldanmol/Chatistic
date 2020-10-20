@@ -65,18 +65,19 @@ class HiveMethods implements LogInterface {
 
 
   @override
-  close()
+  deleteLogs(int logId) async
   {
-    // TODO: implement close
-    return null;
+    var box =await Hive.openBox(hive_box);
+
+    await box.deleteAt(logId);
   }
 
+
   @override
-  deleteLogs(int logId)
-  {
-    // TODO: implement deleteLogs
-    return null;
-  }
+  close()=>Hive.close();
+
+
+
 
 
 
