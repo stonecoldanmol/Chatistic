@@ -6,7 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class SqliteMethods implements LogInterface {
+class SqliteMethods implements LogInterface
+{
   Database _db;
 
   String databaseName = "LogDB";
@@ -23,7 +24,8 @@ class SqliteMethods implements LogInterface {
   String timestamp = 'timestamp';
 
   Future<Database> get db async {
-    if (_db != null) {
+    if (_db != null)
+    {
       return _db;
     }
     print("db was null, now awaiting it");
@@ -54,7 +56,8 @@ class SqliteMethods implements LogInterface {
   }
 
   @override
-  deleteLogs(int logId) async {
+  deleteLogs(int logId) async
+  {
     var dbClient = await db;
     return await dbClient
         .delete(tableName, where: '$id = ?', whereArgs: [logId]);
@@ -92,8 +95,10 @@ class SqliteMethods implements LogInterface {
 
       List<Log> logList = [];
 
-      if (maps.isNotEmpty) {
-        for (Map map in maps) {
+      if (maps.isNotEmpty)
+      {
+        for (Map map in maps)
+        {
           logList.add(Log.fromMap(map));
         }
       }
@@ -106,7 +111,8 @@ class SqliteMethods implements LogInterface {
   }
 
   @override
-  close() async {
+  close() async
+  {
     var dbClient = await db;
     dbClient.close();
   }

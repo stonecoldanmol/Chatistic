@@ -76,9 +76,4 @@ class HiveMethods implements LogInterface {
   @override
   close()=>Hive.close();
 
-
-
-
-
-
 }
