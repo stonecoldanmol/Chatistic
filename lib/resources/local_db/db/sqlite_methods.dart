@@ -15,6 +15,7 @@ class SqliteMethods implements LogInterface
   String tableName = "Call_Logs";
 
   // columns
+
   String id = 'log_id';
   String callerName = 'caller_name';
   String callerPic = 'caller_pic';
@@ -63,7 +64,8 @@ class SqliteMethods implements LogInterface
         .delete(tableName, where: '$id = ?', whereArgs: [logId]);
   }
 
-  updateLogs(Log log) async {
+  updateLogs(Log log) async
+  {
     var dbClient = await db;
 
     await dbClient.update(
