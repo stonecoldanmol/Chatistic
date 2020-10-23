@@ -84,7 +84,8 @@ class SqliteMethods implements LogInterface
       // List<Map> maps = await dbClient.rawQuery("SELECT * FROM $tableName");
       List<Map> maps = await dbClient.query(
         tableName,
-        columns: [
+        columns:
+        [
           id,
           callerName,
           callerPic,
