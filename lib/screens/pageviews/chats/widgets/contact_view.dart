@@ -5,8 +5,9 @@ import 'package:chatistic/resources/auth_methods.dart';
 import 'package:chatistic/resources/chat_methods.dart';
 import 'package:chatistic/screens/chatscreens/chat_screen.dart';
 import 'package:chatistic/screens/chatscreens/widgets/cached_image.dart';
-import 'package:chatistic/screens/pageviews/widgets/last_message_container.dart';
-import 'package:chatistic/screens/pageviews/widgets/online_dot_indicator.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/last_message_container.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/online_dot_indicator.dart';
+
 import 'package:chatistic/widgets/custom_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -4,10 +4,11 @@ import 'package:chatistic/provider/user_provider.dart';
 import 'package:chatistic/resources/auth_methods.dart';
 import 'package:chatistic/resources/chat_methods.dart';
 import 'package:chatistic/screens/callscreens/pickup/pickup_layout.dart';
-import 'package:chatistic/screens/pageviews/widgets/contact_view.dart';
-import 'package:chatistic/screens/pageviews/widgets/new_chat_button.dart';
-import 'package:chatistic/screens/pageviews/widgets/quiet_box.dart';
-import 'package:chatistic/screens/pageviews/widgets/user_circle.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/contact_view.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/new_chat_button.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/quiet_box.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/user_circle.dart';
+
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/utils/utilities.dart';
 import 'package:chatistic/widgets/appbar.dart';

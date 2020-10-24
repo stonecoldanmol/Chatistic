@@ -1,5 +1,6 @@
 import 'package:chatistic/provider/user_provider.dart';
-import 'package:chatistic/screens/pageviews/widgets/user_details_container.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/user_details_container.dart';
+
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:chatistic/utils/utilities.dart';
 import 'package:flutter/material.dart';
