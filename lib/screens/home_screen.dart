@@ -1,8 +1,10 @@
 import 'package:chatistic/enum/user_state.dart';
 import 'package:chatistic/provider/user_provider.dart';
 import 'package:chatistic/resources/auth_methods.dart';
+import 'package:chatistic/resources/local_db/repository/log_repository.dart';
 import 'package:chatistic/screens/callscreens/pickup/pickup_layout.dart';
 import 'package:chatistic/screens/pageviews/chat_list_screen.dart';
+import 'package:chatistic/screens/pageviews/logs/log_screen.dart';
 import 'package:chatistic/utils/universal_variables.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
       await userProvider.refreshUser();
 
       _authMethods.setUserState(userId: userProvider.getUser.uid, userState: UserState.Online,);
+
+      LogRepository.init(isHive: false);
 
     });
 
@@ -112,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
         body: PageView(
           children: <Widget>[
            Container(child: ChatListScreen(),),
-            Center(child: Text('Call Logs',style: TextStyle(color: Colors.white),)),
+            LogScreen(),
             Center(child: Text('Contact Screen',style: TextStyle(color: Colors.white),)),
           ],
           controller: pageController,
