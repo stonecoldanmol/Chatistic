@@ -4,6 +4,7 @@ import 'package:chatistic/provider/user_provider.dart';
 import 'package:chatistic/resources/auth_methods.dart';
 import 'package:chatistic/resources/chat_methods.dart';
 import 'package:chatistic/screens/callscreens/pickup/pickup_layout.dart';
+import 'package:chatistic/screens/pageviews/chats/widgets/chatistic_appbar.dart';
 import 'package:chatistic/screens/pageviews/chats/widgets/contact_view.dart';
 import 'package:chatistic/screens/pageviews/chats/widgets/new_chat_button.dart';
 import 'package:chatistic/screens/pageviews/chats/widgets/quiet_box.dart';
@@ -18,44 +19,32 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChatListScreen extends StatelessWidget {
-  CustomAppBar customAppBar(BuildContext context) {
-    return CustomAppBar(
-      leading: IconButton(
-        icon: Icon(
-          Icons.notifications,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      title: UserCircle(),
-      centerTitle: true,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.search,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.pushNamed(context, "/search_screen");
-          },
-        ),
-        IconButton(
-          icon: Icon(
-            Icons.more_vert,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return PickupLayout(
       scaffold: Scaffold(
         backgroundColor: UniversalVariables.blackColor,
-        appBar: customAppBar(context),
+        appBar: ChatisticAppBar(title: UserCircle(), actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, "/search_screen");
+            },
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
+            onPressed: () {},
+          ),
+        ],
+        ),
         floatingActionButton: NewChatButton(),
         body: ChatListContainer(),
       ),
