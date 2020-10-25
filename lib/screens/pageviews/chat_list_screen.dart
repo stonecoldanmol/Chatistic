@@ -32,7 +32,8 @@ class ChatListScreen extends StatelessWidget {
               Icons.search,
               color: Colors.white,
             ),
-            onPressed: () {
+            onPressed: ()
+            {
               Navigator.pushNamed(context, "/search_screen");
             },
           ),
@@ -52,7 +53,8 @@ class ChatListScreen extends StatelessWidget {
   }
 }
 
-class ChatListContainer extends StatelessWidget {
+class ChatListContainer extends StatelessWidget
+{
   final ChatMethods _chatMethods = ChatMethods();
 
   @override
