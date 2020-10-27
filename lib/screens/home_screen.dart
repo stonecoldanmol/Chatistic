@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
 
       _authMethods.setUserState(userId: userProvider.getUser.uid, userState: UserState.Online,);
 
-      LogRepository.init(isHive: false);
+      LogRepository.init(isHive: true);
 
     });
 
