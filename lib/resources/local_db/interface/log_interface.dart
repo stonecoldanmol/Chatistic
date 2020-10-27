@@ -3,6 +3,9 @@
 import 'package:chatistic/models/log.dart';
 
 abstract class LogInterface {
+
+  openDb(dbName);
+
   init();
 
   addLogs(Log log);

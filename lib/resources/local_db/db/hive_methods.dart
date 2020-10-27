@@ -8,7 +8,10 @@ import 'package:path_provider/path_provider.dart';
 
 class HiveMethods implements LogInterface {
 
-  String hive_box="Call_logs";
+  String hive_box="";
+
+  @override
+  openDb(dbName) => (hive_box = dbName);
 
   @override
   init() async {

@@ -10,7 +10,7 @@ class SqliteMethods implements LogInterface
 {
   Database _db;
 
-  String databaseName = "LogDB";
+  String databaseName = "";
 
   String tableName = "Call_Logs";
 
@@ -33,6 +33,9 @@ class SqliteMethods implements LogInterface
     _db = await init();
     return _db;
   }
+
+  @override
+  openDb(dbName) => (databaseName = dbName);
 
   @override
   init() async {
