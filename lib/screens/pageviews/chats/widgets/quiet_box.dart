@@ -4,6 +4,18 @@ import 'package:flutter/material.dart';
 
 
 class QuietBox extends StatelessWidget {
+
+  final String heading;
+  final String subtitle;
+
+  QuietBox({
+    @required this.heading,
+    @required this.subtitle,
+  });
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Center(
