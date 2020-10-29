@@ -30,7 +30,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
     super.initState();
 
 
-    SchedulerBinding.instance.addPostFrameCallback((_)async{
+    SchedulerBinding.instance.addPostFrameCallback((_)async
+    {
 
       userProvider=Provider.of<UserProvider>(context,listen: false);
       await userProvider.refreshUser();
@@ -110,7 +111,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
 
     double _labelFontSize=10;
 
