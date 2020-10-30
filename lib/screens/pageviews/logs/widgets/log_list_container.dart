@@ -52,15 +52,19 @@ class _LogListContainerState extends State<LogListContainer> {
 
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return FutureBuilder<dynamic>(
       future: LogRepository.getLogs(),
-      builder: (BuildContext context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+      builder: (BuildContext context, snapshot)
+      {
+        if (snapshot.connectionState == ConnectionState.waiting)
+        {
           return Center(child: CircularProgressIndicator());
         }
 
-        if (snapshot.hasData) {
+        if (snapshot.hasData)
+        {
           List<dynamic> logList = snapshot.data;
 
           if (logList.isNotEmpty) {
